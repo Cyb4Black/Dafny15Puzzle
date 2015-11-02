@@ -40,12 +40,15 @@ namespace Dafny15Puzzle
             BigInteger[] initArray = {16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16};
             game = new Game();
             game.Init(initArray);
-            Boolean solvable;
+            Boolean solvable=false;
 
 
-           
-            Scramble();
 
+            do
+            {
+                Scramble();
+                game.IsSolvable(out solvable);
+            } while (!solvable);
 
             fitPTtoItems();
 
@@ -101,7 +104,9 @@ namespace Dafny15Puzzle
          * Vertauscht das Bild einer PicBox mit dem Bild der MoveAble PicBox 
          */
         void SwapBoxes(int BoxNumber)
-        {   PuzzleTile dummy = PT[BoxNumber];
+        {
+
+            BigInteger PosById;
             BigInteger flagDummy;
             game.CanMove((BigInteger) BoxNumber,out flagDummy);
             if (flagDummy == 16)
@@ -109,8 +114,10 @@ namespace Dafny15Puzzle
                 labelStatus.Text = "Ungültiger Zug";
                 return;
             }
-
-
+            game.FindPosById(BoxNumber, out PosById);
+            game.MoveItem(PosById, flagDummy);
+            fitPTtoItems();
+           /*
             PT[BoxNumber] = PT[MoveablePTFlag];
             picBoxes[BoxNumber].Image = PT[BoxNumber].PuzzleTileImage;
             game.MoveItem(BoxNumber,MoveablePTFlag);
@@ -119,6 +126,7 @@ namespace Dafny15Puzzle
             MoveablePTFlag = BoxNumber;
             TurnCounter++;
             TurnCounterUpdate();
+            */
 
         }
         /*
@@ -131,7 +139,7 @@ namespace Dafny15Puzzle
             {
                 if (PT[i].PuzzleTileImage == dummy.Image)
                 {
-                    SwapBoxes(i);
+                    SwapBoxes(PT[i].ID);
                     return;
                 }
             }
@@ -262,8 +270,7 @@ namespace Dafny15Puzzle
          */
         private void restart_Click(object sender, EventArgs e)
         {
-            Random rand = new Random();
-            SwapBoxes(rand.Next(15));
+            NewGame();
             
         }
 
