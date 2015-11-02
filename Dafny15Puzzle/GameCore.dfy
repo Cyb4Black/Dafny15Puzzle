@@ -27,8 +27,10 @@
 	requires Valid();
 	ensures old(items) == items;
 	ensures Valid();
+	ensures 0 <= pos < 16;
 	{
 		var i := 0;
+		pos := 0;
 		while(i <= 15)
 		invariant 0 <= i <= 16;
 		invariant old(items) == items;
@@ -59,13 +61,15 @@
 		}
 	}
 
-	method GetIdByPos(pos: int) returns (id: int)
+	function method GetIdByPos(pos: int) : int
+	reads this;
+	reads items;
 	requires Valid();
 	requires 0 <= pos < items.Length;
-	ensures old(items) == items;
+	
 	ensures Valid();
 	{
-		id := items[pos];
+		items[pos]
 	}
 
 	method BoardSolved() returns (b: bool)
@@ -115,12 +119,12 @@
 		}
 	}
 
-	method IsBorderSwitch(x: int, y: int) returns (b: bool)
+	function method IsBorderSwitch(x: int, y: int) : bool
 	requires Valid();
-	ensures old(items) == items;
-	ensures Valid();
+	reads this;
+	reads borders;
 	{
-		b := (BordersContain(x) && BordersContain(y));
+		(BordersContain(x) && BordersContain(y))
 	}
 
 	function method BordersContain(v: int) : bool
@@ -135,6 +139,33 @@
 	requires Valid();
 	ensures Valid();
 	{
-		
+		var indexToMove := FindPosById(id);
+		target := 16;
+		if(id != 15){
+			if(!IsBorderSwitch(indexToMove, (indexToMove + 1)) && id < 15 && (indexToMove + 1 < 16) && GetIdByPos(indexToMove +1) == 15){
+				target := indexToMove + 1;
+			}
+			if(!IsBorderSwitch(indexToMove, (indexToMove - 1)) && id < 15 && (indexToMove - 1 >= 0) && GetIdByPos(indexToMove - 1) == 15){
+				target := indexToMove - 1;
+			}
+			if(!IsBorderSwitch(indexToMove, (indexToMove + 4)) && id < 15 && (indexToMove + 4 < 16) && GetIdByPos(indexToMove + 4) == 15){
+				target := indexToMove + 4;
+			}
+			if(!IsBorderSwitch(indexToMove, (indexToMove - 4)) && id < 15 && (indexToMove - 4 >= 0) && GetIdByPos(indexToMove - 4) == 15){
+				target := indexToMove - 4;
+			}
+		}
+	}
+
+	method MoveItem (indexToMove: int, targetIndex: int)
+	requires Valid();
+	requires 0 <= indexToMove < 16;
+	requires 0 <= targetIndex < 16;
+	modifies items;
+	ensures Valid();
+	{
+		var dummy := items[targetIndex];
+		items[targetIndex] := items[indexToMove];
+		items[indexToMove] := dummy;
 	}
 }
