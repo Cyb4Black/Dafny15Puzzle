@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Numerics;
 
 namespace Dafny15Puzzle
 {
@@ -20,7 +21,7 @@ namespace Dafny15Puzzle
         PictureBox[] picBoxes = null;
         PuzzleTile[] PT = null;
         const int BOX_NUM = 16;
-
+        private Game game;
 
 
         public Form1()
@@ -35,7 +36,17 @@ namespace Dafny15Puzzle
         }
 
         public void NewGame()
-        {   
+        {
+            BigInteger[] initArray = {0,1,2,3,4,5,6,7,8,9,10,1,12,13,14,15};
+            game = new Game();
+            game.Init(initArray);
+
+
+        }
+
+        private void Scramble()
+        {
+
         }
 
         void TimerTick(object sender, EventArgs e)
