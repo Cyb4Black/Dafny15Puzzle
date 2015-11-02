@@ -13,12 +13,12 @@ namespace Dafny15Puzzle
     public partial class Form1 : Form
     {
         private readonly int[] _bordersNums = { 0, 4, 8, 12, 3, 7, 11, 15 };
-        private int MoveableBox;
+        private int MoveablePTFlag;
         OpenFileDialog openFileDialog = null;
         Image image;
         PictureBox picBoxWhole = null;
         PictureBox[] picBoxes = null;
-        Image[] images = null;
+        PuzzleTile[] PT = null;
         const int BOX_NUM = 16;
 
 
@@ -46,20 +46,25 @@ namespace Dafny15Puzzle
          * Vertauscht das Bild einer PicBox mit dem Bild der MoveAble PicBox 
          */
         void SwapBoxes(int BoxNumber)
-        {   Image dummy = picBoxes[BoxNumber].Image;
+        {   PuzzleTile dummy = PT[BoxNumber];
 
-            picBoxes[BoxNumber].Image = picBoxes[MoveableBox].Image;
-            picBoxes[MoveableBox].Image = dummy;
-            MoveableBox = BoxNumber;
+            PT[BoxNumber]= PT[MoveablePTFlag];
+            picBoxes[BoxNumber].Image = PT[BoxNumber].PuzzleTileImage;
+            PT[MoveablePTFlag] = dummy;
+            picBoxes[MoveablePTFlag].Image = dummy.PuzzleTileImage;
+            MoveablePTFlag = BoxNumber;
 
         }
-
+        /*
+         * Click event auf eine PicBox
+         */
         void picBoxes_click(object sender, EventArgs e)
         {
-           
-        }
+            PictureBox dummy = (PictureBox)sender;
+            SwapBoxes(Array.IndexOf(picBoxes, dummy));
 
 
+         }
 
         /*
          * Click-Event des ChooseImageButtons
@@ -82,7 +87,7 @@ namespace Dafny15Puzzle
 
 
                 splitImagesToPicBoxes();
-                MoveableBox = 15;
+                MoveablePTFlag = 15;
                 clearBox(picBoxes[15]);
     
             }
@@ -112,7 +117,7 @@ namespace Dafny15Puzzle
             }
             if (picBoxes == null)
             {
-                images = new Image[BOX_NUM];
+                PT = new PuzzleTile[BOX_NUM];
                 picBoxes = new PictureBox[BOX_NUM];
             }
             int numRow = 4;
@@ -127,14 +132,18 @@ namespace Dafny15Puzzle
                 {
                     picBoxes[i] = new PictureBox();
                     picBoxes[i].BorderStyle = BorderStyle.Fixed3D;
+                    picBoxes[i].Click += new EventHandler(picBoxes_click);
                 }
                     
                 picBoxes[i].Width = unitX;
                 picBoxes[i].Height = unitY;
 
-
-                picBoxes[i].Image = CreateBitmapImage(image,i, numRow, numCol, unitX, unitY);
+                PT[i] = new PuzzleTile();
+                PT[i].ID= i;
+                PT[i].PuzzleTileImage = CreateBitmapImage(image,i, numRow, numCol, unitX, unitY);
+                picBoxes[i].Image = PT[i].PuzzleTileImage;
                 picBoxes[i].Location = new Point(unitX * (i % numCol), unitY * (i / numCol));
+
                 PuzzleBox.Controls.Add(picBoxes[i]);
             }
 

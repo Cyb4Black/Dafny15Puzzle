@@ -83,7 +83,6 @@
             this.PuzzleBox.TabIndex = 1;
             this.PuzzleBox.TabStop = false;
             this.PuzzleBox.Text = "Puzzle";
-            this.PuzzleBox.Click += new System.EventHandler(this.picBoxes_click);
             // 
             // StatusBox
             // 
