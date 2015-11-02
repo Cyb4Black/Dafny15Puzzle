@@ -37,24 +37,58 @@ namespace Dafny15Puzzle
 
         public void NewGame()
         {
-            BigInteger[] initArray = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
+            BigInteger[] initArray = {16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16};
             game = new Game();
             game.Init(initArray);
             Boolean solvable;
 
-            do{
-                Scramble();
-                game.IsSolvable(out solvable);
-            }while(!solvable);
 
+           
+            Scramble();
+
+
+            fitPTtoItems();
+
+        }
+
+        private void fitPTtoItems()
+        {   PuzzleTile dummyTile = PT[15];
+            PuzzleTile[] dummy = new PuzzleTile[BOX_NUM];
+            
+            for (int i = 0; i < 16; i++)
+            {
+                for (int j = 0; j < 16; j++)
+                {
+                    if (game.items[i] == PT[j].ID)
+                    {
+                        dummy[i] = PT[j];
+                    }
+                }
+                
+            }
+            PT = dummy;
+            for (int i = 0; i<16; i++)
+            {
+                picBoxes[i].Image = PT[i].PuzzleTileImage;
+            }
+            MoveablePTFlag=Array.IndexOf(PT, dummyTile);
+            
         }
 
         private void Scramble()
         {
             Random rand = new Random();
-            for (int i = 0; i < 16; i++)
+            int newNumber= rand.Next(16);
+            game.items[0] = (newNumber);
+            for (int i = 1; i < 16; i++)
             {
-                game.items[i] = rand.Next(i, 16);
+                
+
+                while(game.items.Contains((newNumber))){
+                    newNumber = rand.Next(16);
+                    
+                }
+                game.items[i] = (newNumber);
             }
 
         }
@@ -68,9 +102,18 @@ namespace Dafny15Puzzle
          */
         void SwapBoxes(int BoxNumber)
         {   PuzzleTile dummy = PT[BoxNumber];
+            BigInteger flagDummy;
+            game.CanMove((BigInteger) BoxNumber,out flagDummy);
+            if (flagDummy == 16)
+            {
+                labelStatus.Text = "Ungültiger Zug";
+                return;
+            }
+
 
             PT[BoxNumber] = PT[MoveablePTFlag];
             picBoxes[BoxNumber].Image = PT[BoxNumber].PuzzleTileImage;
+            game.MoveItem(BoxNumber,MoveablePTFlag);
             PT[MoveablePTFlag] = dummy;
             picBoxes[MoveablePTFlag].Image = dummy.PuzzleTileImage;
             MoveablePTFlag = BoxNumber;
@@ -84,7 +127,14 @@ namespace Dafny15Puzzle
         void picBoxes_click(object sender, EventArgs e)
         {
             PictureBox dummy = (PictureBox)sender;
-            SwapBoxes(Array.IndexOf(picBoxes, dummy));
+            for (int i=0; i < 16; i++)
+            {
+                if (PT[i].PuzzleTileImage == dummy.Image)
+                {
+                    SwapBoxes(i);
+                    return;
+                }
+            }
 
 
          }
@@ -120,6 +170,7 @@ namespace Dafny15Puzzle
                 clearBox(picBoxes[15]);
                 TurnCounter = 0;
                 TurnCounterUpdate();
+                NewGame();
             }
         }
 
