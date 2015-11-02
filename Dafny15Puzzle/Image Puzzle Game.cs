@@ -22,7 +22,6 @@ namespace Dafny15Puzzle
         PuzzleTile[] PT = null;
         const int BOX_NUM = 16;
         private Game game;
-        Boolean Solved= true;
 
 
         public Form1()
@@ -38,16 +37,25 @@ namespace Dafny15Puzzle
 
         public void NewGame()
         {
-            BigInteger[] initArray = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+            BigInteger[] initArray = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
             game = new Game();
             game.Init(initArray);
-            game.BoardSolved(out Solved);
-            isSolved(Solved);
+            Boolean solvable;
+
+            do{
+                Scramble();
+                game.IsSolvable(out solvable);
+            }while(!solvable);
 
         }
 
         private void Scramble()
         {
+            Random rand = new Random();
+            for (int i = 0; i < 16; i++)
+            {
+                game.items[i] = rand.Next(i, 16);
+            }
 
         }
 
@@ -60,35 +68,15 @@ namespace Dafny15Puzzle
          */
         void SwapBoxes(int BoxNumber)
         {   PuzzleTile dummy = PT[BoxNumber];
-            BigInteger FlagDummy = MoveablePTFlag;
 
-            game.CanMove((BigInteger)BoxNumber, out FlagDummy);
-            if (FlagDummy == 16)
-            {
-                labelStatus.Text = "Ungültiger Zug";
-                return;
-            }
-            game.MoveItem(BoxNumber,MoveablePTFlag);
             PT[BoxNumber] = PT[MoveablePTFlag];
             picBoxes[BoxNumber].Image = PT[BoxNumber].PuzzleTileImage;
-
             PT[MoveablePTFlag] = dummy;
             picBoxes[MoveablePTFlag].Image = dummy.PuzzleTileImage;
             MoveablePTFlag = BoxNumber;
             TurnCounter++;
             TurnCounterUpdate();
 
-            game.BoardSolved(out Solved);
-            isSolved(Solved);
-        }
-
-        private void isSolved(bool Solved)
-        {   
-            if (Solved)
-            {
-                labelStatus.Text = "Solved";
-            }
-            else labelStatus.Text = "Unsolved";
         }
         /*
          * Click event auf eine PicBox
@@ -132,7 +120,6 @@ namespace Dafny15Puzzle
                 clearBox(picBoxes[15]);
                 TurnCounter = 0;
                 TurnCounterUpdate();
-                NewGame();
             }
         }
 
