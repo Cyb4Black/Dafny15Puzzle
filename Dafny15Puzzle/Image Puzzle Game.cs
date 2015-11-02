@@ -54,7 +54,7 @@ namespace Dafny15Puzzle
 
         }
 
-        void picBoxes_click(object sender, EventArgs e)
+        void picBoxes_click(object sender, MouseEventArgs e)
         {
            
         }
