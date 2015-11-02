@@ -14,7 +14,7 @@ namespace Dafny15Puzzle
     public partial class Form1 : Form
     {
         private readonly int[] _bordersNums = { 0, 4, 8, 12, 3, 7, 11, 15 };
-        private int MoveablePTFlag;
+        private int MoveablePTFlag, TurnCounter;
         OpenFileDialog openFileDialog = null;
         Image image;
         PictureBox picBoxWhole = null;
@@ -59,11 +59,13 @@ namespace Dafny15Puzzle
         void SwapBoxes(int BoxNumber)
         {   PuzzleTile dummy = PT[BoxNumber];
 
-            PT[BoxNumber]= PT[MoveablePTFlag];
+            PT[BoxNumber] = PT[MoveablePTFlag];
             picBoxes[BoxNumber].Image = PT[BoxNumber].PuzzleTileImage;
             PT[MoveablePTFlag] = dummy;
             picBoxes[MoveablePTFlag].Image = dummy.PuzzleTileImage;
             MoveablePTFlag = BoxNumber;
+            TurnCounter++;
+            TurnCounterUpdate();
 
         }
         /*
@@ -77,6 +79,12 @@ namespace Dafny15Puzzle
 
          }
 
+
+        void TurnCounterUpdate()
+        {
+            TurnCounterLabel.Text = TurnCounter.ToString();
+        }
+
         /*
          * Click-Event des ChooseImageButtons
          */
@@ -87,7 +95,7 @@ namespace Dafny15Puzzle
             if(openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 image = CreateBitmapImage(Image.FromFile(openFileDialog.FileName));
-
+                textboxImagePath.Text = openFileDialog.FileName;
                 if (picBoxWhole == null)
                 {
                     picBoxWhole = new PictureBox();
@@ -100,7 +108,8 @@ namespace Dafny15Puzzle
                 splitImagesToPicBoxes();
                 MoveablePTFlag = 15;
                 clearBox(picBoxes[15]);
-    
+                TurnCounter = 0;
+                TurnCounterUpdate();
             }
         }
 
@@ -113,7 +122,7 @@ namespace Dafny15Puzzle
             objGraphics.Clear(Color.White); 
         }
 
-   
+  
 
         /*
          * Zerteilt das Bild in 16 PictureBoxen mit jeweils 16 Images

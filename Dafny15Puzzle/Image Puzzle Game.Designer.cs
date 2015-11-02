@@ -33,18 +33,18 @@
             this.textboxImagePath = new System.Windows.Forms.TextBox();
             this.PuzzleBox = new System.Windows.Forms.GroupBox();
             this.StatusBox = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.TurnCounterLabel = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.labelStatus = new System.Windows.Forms.Label();
             this.SteuerungsBox = new System.Windows.Forms.GroupBox();
             this.RestartButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.ChooseImageBox.SuspendLayout();
             this.StatusBox.SuspendLayout();
-            this.SteuerungsBox.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.SteuerungsBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // ChooseImageBox
@@ -96,6 +96,45 @@
             this.StatusBox.TabStop = false;
             this.StatusBox.Text = "Status";
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.TurnCounterLabel);
+            this.groupBox2.Location = new System.Drawing.Point(180, 29);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(76, 55);
+            this.groupBox2.TabIndex = 4;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Spielzüge";
+            // 
+            // TurnCounterLabel
+            // 
+            this.TurnCounterLabel.AutoSize = true;
+            this.TurnCounterLabel.Location = new System.Drawing.Point(17, 25);
+            this.TurnCounterLabel.Name = "TurnCounterLabel";
+            this.TurnCounterLabel.Size = new System.Drawing.Size(13, 13);
+            this.TurnCounterLabel.TabIndex = 2;
+            this.TurnCounterLabel.Text = "0";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Location = new System.Drawing.Point(30, 29);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(80, 40);
+            this.groupBox1.TabIndex = 3;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Spiel-Zeit";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(19, 19);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "label1";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
             // labelStatus
             // 
             this.labelStatus.AutoSize = true;
@@ -125,45 +164,6 @@
             this.RestartButton.UseVisualStyleBackColor = true;
             this.RestartButton.Click += new System.EventHandler(this.restart_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 19);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "label1";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(17, 25);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "label2";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(30, 29);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(80, 40);
-            this.groupBox1.TabIndex = 3;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Spiel-Zeit";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Location = new System.Drawing.Point(180, 29);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(76, 55);
-            this.groupBox2.TabIndex = 4;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "groupBox2";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -183,11 +183,11 @@
             this.ChooseImageBox.PerformLayout();
             this.StatusBox.ResumeLayout(false);
             this.StatusBox.PerformLayout();
-            this.SteuerungsBox.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.SteuerungsBox.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -203,7 +203,7 @@
         private System.Windows.Forms.GroupBox SteuerungsBox;
         private System.Windows.Forms.Button RestartButton;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label TurnCounterLabel;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label1;
     }
