@@ -37,15 +37,25 @@ namespace Dafny15Puzzle
 
         public void NewGame()
         {
-            BigInteger[] initArray = {0,1,2,3,4,5,6,7,8,9,10,1,12,13,14,15};
+            BigInteger[] initArray = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
             game = new Game();
             game.Init(initArray);
+            Boolean solvable;
 
+            do{
+                Scramble();
+                game.IsSolvable(out solvable);
+            }while(!solvable);
 
         }
 
         private void Scramble()
         {
+            Random rand = new Random();
+            for (int i = 0; i < 16; i++)
+            {
+                game.items[i] = rand.Next(i, 16);
+            }
 
         }
 

@@ -148,10 +148,10 @@
 			if(!IsBorderSwitch(indexToMove, (indexToMove - 1)) && id < 15 && (indexToMove - 1 >= 0) && GetIdByPos(indexToMove - 1) == 15){
 				target := indexToMove - 1;
 			}
-			if(!IsBorderSwitch(indexToMove, (indexToMove + 4)) && id < 15 && (indexToMove + 4 < 16) && GetIdByPos(indexToMove + 4) == 15){
+			if(id < 15 && (indexToMove + 4 < 16) && GetIdByPos(indexToMove + 4) == 15){
 				target := indexToMove + 4;
 			}
-			if(!IsBorderSwitch(indexToMove, (indexToMove - 4)) && id < 15 && (indexToMove - 4 >= 0) && GetIdByPos(indexToMove - 4) == 15){
+			if(id < 15 && (indexToMove - 4 >= 0) && GetIdByPos(indexToMove - 4) == 15){
 				target := indexToMove - 4;
 			}
 		}
