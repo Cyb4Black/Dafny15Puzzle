@@ -103,12 +103,13 @@
 		{
 			var num1 := GetIdByPos(i);
 			var num2 := GetIdByPos(i - 1);
-
-			if(num1 > num2)
-			{
-				n := n + 1;
+			
+			if(num1 != 15){
+				if(num1 > num2)
+				{
+					n := n + 1;
+				}
 			}
-
 			i := i + 1;
 		}
 
