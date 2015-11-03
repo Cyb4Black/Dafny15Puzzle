@@ -117,16 +117,9 @@ namespace Dafny15Puzzle
             game.FindPosById(BoxNumber, out PosById);
             game.MoveItem(PosById, flagDummy);
             fitPTtoItems();
-           /*
-            PT[BoxNumber] = PT[MoveablePTFlag];
-            picBoxes[BoxNumber].Image = PT[BoxNumber].PuzzleTileImage;
-            game.MoveItem(BoxNumber,MoveablePTFlag);
-            PT[MoveablePTFlag] = dummy;
-            picBoxes[MoveablePTFlag].Image = dummy.PuzzleTileImage;
-            MoveablePTFlag = BoxNumber;
             TurnCounter++;
             TurnCounterUpdate();
-            */
+            
 
         }
         /*
