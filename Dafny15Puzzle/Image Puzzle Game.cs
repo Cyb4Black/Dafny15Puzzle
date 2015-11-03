@@ -38,14 +38,14 @@ namespace Dafny15Puzzle
         public void NewGame()
         {
             BigInteger[] initArray = {16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16};
-            game = new Game();
-            game.Init(initArray);
-            Boolean solvable=false;
-
-
+            //game = new Game();
+            Boolean solvable;
 
             do
             {
+                solvable = false;
+                game = new Game();
+                game.Init((BigInteger[])initArray.Clone());
                 Scramble();
                 game.IsSolvable(out solvable);
             } while (!solvable);
