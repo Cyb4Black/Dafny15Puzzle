@@ -22,7 +22,8 @@ namespace Dafny15Puzzle
         PuzzleTile[] PT = null;
         const int BOX_NUM = 16;
         private Game game;
-
+        bool GameOn=true;
+        DateTime StoppUhr=DateTime.MinValue;
 
         public Form1()
         {
@@ -51,6 +52,7 @@ namespace Dafny15Puzzle
             } while (!solvable);
 
             fitPTtoItems();
+            timer1.Start();
 
         }
 
@@ -105,20 +107,30 @@ namespace Dafny15Puzzle
          */
         void SwapBoxes(int BoxNumber)
         {
-
-            BigInteger PosById;
-            BigInteger flagDummy;
-            game.CanMove((BigInteger) BoxNumber,out flagDummy);
-            if (flagDummy == 16)
+            if (GameOn)
             {
-                labelStatus.Text = "Ungültiger Zug";
-                return;
+                BigInteger PosById;
+                BigInteger flagDummy;
+                bool BoardSolved = false;
+                game.CanMove((BigInteger)BoxNumber, out flagDummy);
+                if (flagDummy == 16)
+                {
+                    labelStatus.Text = "Ungültiger Zug";
+                    return;
+                }
+                game.FindPosById(BoxNumber, out PosById);
+                game.MoveItem(PosById, flagDummy);
+                fitPTtoItems();
+                TurnCounter++;
+                TurnCounterUpdate();
+
+                game.BoardSolved(out BoardSolved);
+                if (BoardSolved)
+                {
+                    GameOn = false;
+                    labelStatus.Text = "Gewonnen";
+                }
             }
-            game.FindPosById(BoxNumber, out PosById);
-            game.MoveItem(PosById, flagDummy);
-            fitPTtoItems();
-            TurnCounter++;
-            TurnCounterUpdate();
             
 
         }
@@ -143,7 +155,7 @@ namespace Dafny15Puzzle
 
         void TurnCounterUpdate()
         {
-            TurnCounterLabel.Text = TurnCounter.ToString();
+            LabelTurnCounter.Text = TurnCounter.ToString();
         }
 
         /*
@@ -171,7 +183,6 @@ namespace Dafny15Puzzle
                 clearBox(picBoxes[15]);
                 TurnCounter = 0;
                 TurnCounterUpdate();
-                NewGame();
             }
         }
 
@@ -264,13 +275,20 @@ namespace Dafny15Puzzle
         private void restart_Click(object sender, EventArgs e)
         {
             NewGame();
-            
+         
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void StartButton_Click(object sender, EventArgs e)
         {
-
+            NewGame();
         }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            StoppUhr=StoppUhr.AddSeconds(1);
+            LabelTime.Text = StoppUhr.ToLongTimeString();
+        }
+
 
        
 

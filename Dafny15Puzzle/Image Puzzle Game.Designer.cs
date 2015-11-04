@@ -28,18 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.ChooseImageBox = new System.Windows.Forms.GroupBox();
             this.ChooseImageButton = new System.Windows.Forms.Button();
             this.textboxImagePath = new System.Windows.Forms.TextBox();
             this.PuzzleBox = new System.Windows.Forms.GroupBox();
             this.StatusBox = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.TurnCounterLabel = new System.Windows.Forms.Label();
+            this.LabelTurnCounter = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.LabelTime = new System.Windows.Forms.Label();
             this.labelStatus = new System.Windows.Forms.Label();
             this.SteuerungsBox = new System.Windows.Forms.GroupBox();
+            this.StartButton = new System.Windows.Forms.Button();
             this.RestartButton = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.ChooseImageBox.SuspendLayout();
             this.StatusBox.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -98,47 +101,46 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.TurnCounterLabel);
+            this.groupBox2.Controls.Add(this.LabelTurnCounter);
             this.groupBox2.Location = new System.Drawing.Point(180, 29);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(76, 55);
+            this.groupBox2.Size = new System.Drawing.Size(90, 50);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Spielzüge";
             // 
-            // TurnCounterLabel
+            // LabelTurnCounter
             // 
-            this.TurnCounterLabel.AutoSize = true;
-            this.TurnCounterLabel.Location = new System.Drawing.Point(17, 25);
-            this.TurnCounterLabel.Name = "TurnCounterLabel";
-            this.TurnCounterLabel.Size = new System.Drawing.Size(13, 13);
-            this.TurnCounterLabel.TabIndex = 2;
-            this.TurnCounterLabel.Text = "0";
+            this.LabelTurnCounter.AutoSize = true;
+            this.LabelTurnCounter.Location = new System.Drawing.Point(41, 25);
+            this.LabelTurnCounter.Name = "LabelTurnCounter";
+            this.LabelTurnCounter.Size = new System.Drawing.Size(13, 13);
+            this.LabelTurnCounter.TabIndex = 2;
+            this.LabelTurnCounter.Text = "0";
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.LabelTime);
             this.groupBox1.Location = new System.Drawing.Point(30, 29);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(80, 40);
+            this.groupBox1.Size = new System.Drawing.Size(90, 50);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Spiel-Zeit";
             // 
-            // label1
+            // LabelTime
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 19);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "label1";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.LabelTime.AutoSize = true;
+            this.LabelTime.Location = new System.Drawing.Point(24, 25);
+            this.LabelTime.Name = "LabelTime";
+            this.LabelTime.Size = new System.Drawing.Size(34, 13);
+            this.LabelTime.TabIndex = 1;
+            this.LabelTime.Text = "00:00";
             // 
             // labelStatus
             // 
             this.labelStatus.AutoSize = true;
-            this.labelStatus.Location = new System.Drawing.Point(114, 96);
+            this.labelStatus.Location = new System.Drawing.Point(114, 93);
             this.labelStatus.Name = "labelStatus";
             this.labelStatus.Size = new System.Drawing.Size(24, 13);
             this.labelStatus.TabIndex = 0;
@@ -146,6 +148,7 @@
             // 
             // SteuerungsBox
             // 
+            this.SteuerungsBox.Controls.Add(this.StartButton);
             this.SteuerungsBox.Controls.Add(this.RestartButton);
             this.SteuerungsBox.Location = new System.Drawing.Point(527, 446);
             this.SteuerungsBox.Name = "SteuerungsBox";
@@ -154,15 +157,30 @@
             this.SteuerungsBox.TabStop = false;
             this.SteuerungsBox.Text = "Steuerung";
             // 
+            // StartButton
+            // 
+            this.StartButton.Location = new System.Drawing.Point(6, 35);
+            this.StartButton.Name = "StartButton";
+            this.StartButton.Size = new System.Drawing.Size(130, 42);
+            this.StartButton.TabIndex = 1;
+            this.StartButton.Text = "Start";
+            this.StartButton.UseVisualStyleBackColor = true;
+            this.StartButton.Click += new System.EventHandler(this.StartButton_Click);
+            // 
             // RestartButton
             // 
-            this.RestartButton.Location = new System.Drawing.Point(6, 19);
+            this.RestartButton.Location = new System.Drawing.Point(147, 35);
             this.RestartButton.Name = "RestartButton";
-            this.RestartButton.Size = new System.Drawing.Size(105, 27);
+            this.RestartButton.Size = new System.Drawing.Size(130, 42);
             this.RestartButton.TabIndex = 0;
             this.RestartButton.Text = "Restart";
             this.RestartButton.UseVisualStyleBackColor = true;
             this.RestartButton.Click += new System.EventHandler(this.restart_Click);
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Form1
             // 
@@ -203,9 +221,11 @@
         private System.Windows.Forms.GroupBox SteuerungsBox;
         private System.Windows.Forms.Button RestartButton;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Label TurnCounterLabel;
+        private System.Windows.Forms.Label LabelTurnCounter;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label LabelTime;
+        private System.Windows.Forms.Button StartButton;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 
