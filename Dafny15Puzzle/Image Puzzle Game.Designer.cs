@@ -41,7 +41,7 @@
             this.labelStatus = new System.Windows.Forms.Label();
             this.SteuerungsBox = new System.Windows.Forms.GroupBox();
             this.StartButton = new System.Windows.Forms.Button();
-            this.RestartButton = new System.Windows.Forms.Button();
+            this.ReScrambleButton = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.ChooseImageBox.SuspendLayout();
             this.StatusBox.SuspendLayout();
@@ -149,7 +149,7 @@
             // SteuerungsBox
             // 
             this.SteuerungsBox.Controls.Add(this.StartButton);
-            this.SteuerungsBox.Controls.Add(this.RestartButton);
+            this.SteuerungsBox.Controls.Add(this.ReScrambleButton);
             this.SteuerungsBox.Location = new System.Drawing.Point(527, 446);
             this.SteuerungsBox.Name = "SteuerungsBox";
             this.SteuerungsBox.Size = new System.Drawing.Size(279, 107);
@@ -167,15 +167,15 @@
             this.StartButton.UseVisualStyleBackColor = true;
             this.StartButton.Click += new System.EventHandler(this.StartButton_Click);
             // 
-            // RestartButton
+            // ReScrambleButton
             // 
-            this.RestartButton.Location = new System.Drawing.Point(147, 35);
-            this.RestartButton.Name = "RestartButton";
-            this.RestartButton.Size = new System.Drawing.Size(130, 42);
-            this.RestartButton.TabIndex = 0;
-            this.RestartButton.Text = "Restart";
-            this.RestartButton.UseVisualStyleBackColor = true;
-            this.RestartButton.Click += new System.EventHandler(this.restart_Click);
+            this.ReScrambleButton.Location = new System.Drawing.Point(147, 35);
+            this.ReScrambleButton.Name = "ReScrambleButton";
+            this.ReScrambleButton.Size = new System.Drawing.Size(130, 42);
+            this.ReScrambleButton.TabIndex = 0;
+            this.ReScrambleButton.Text = "ReScramble";
+            this.ReScrambleButton.UseVisualStyleBackColor = true;
+            this.ReScrambleButton.Click += new System.EventHandler(this.reScramble_Click);
             // 
             // timer1
             // 
@@ -219,13 +219,13 @@
         private System.Windows.Forms.GroupBox StatusBox;
         private System.Windows.Forms.Label labelStatus;
         private System.Windows.Forms.GroupBox SteuerungsBox;
-        private System.Windows.Forms.Button RestartButton;
+        private System.Windows.Forms.Button ReScrambleButton;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label LabelTurnCounter;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label LabelTime;
         private System.Windows.Forms.Button StartButton;
-        private System.Windows.Forms.Timer timer1;
+        public System.Windows.Forms.Timer timer1;
     }
 }
 

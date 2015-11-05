@@ -13,7 +13,6 @@ namespace Dafny15Puzzle
 {
     public partial class Form1 : Form
     {
-        private readonly int[] _bordersNums = { 0, 4, 8, 12, 3, 7, 11, 15 };
         private int MoveablePTFlag, TurnCounter;
         OpenFileDialog openFileDialog = null;
         Image image;
@@ -21,8 +20,9 @@ namespace Dafny15Puzzle
         PictureBox[] picBoxes = null;
         PuzzleTile[] PT = null;
         const int BOX_NUM = 16;
+        BigInteger[] initArray = { 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16 };
         private Game game;
-        bool GameOn=true;
+        bool GameOn=false;
         DateTime StoppUhr=DateTime.MinValue;
 
         public Form1()
@@ -38,8 +38,16 @@ namespace Dafny15Puzzle
 
         public void NewGame()
         {
-            BigInteger[] initArray = {16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16};
-            //game = new Game();
+            StoppUhr = DateTime.MinValue;
+            TurnCounter = 0;
+            TurnCounterUpdate();
+            ReScramble();
+            timer1.Start();
+            GameOn = true;
+        }
+
+        private void ReScramble()
+        {
             Boolean solvable;
 
             do
@@ -52,8 +60,6 @@ namespace Dafny15Puzzle
             } while (!solvable);
 
             fitPTtoItems();
-            timer1.Start();
-
         }
 
         private void fitPTtoItems()
@@ -272,9 +278,9 @@ namespace Dafny15Puzzle
         /*
          * Click-Event des RestartButtons
          */
-        private void restart_Click(object sender, EventArgs e)
+        private void reScramble_Click(object sender, EventArgs e)
         {
-            NewGame();
+            ReScramble();
          
         }
 
