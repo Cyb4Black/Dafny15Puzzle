@@ -37,12 +37,12 @@ namespace Dafny15Puzzle
         }
 
         public void NewGame()
-        {
+        {   
             StoppUhr = DateTime.MinValue;
+            timer1.Start();
             TurnCounter = 0;
             TurnCounterUpdate();
             ReScramble();
-            timer1.Start();
             GameOn = true;
         }
 
@@ -124,6 +124,10 @@ namespace Dafny15Puzzle
                     labelStatus.Text = "Ungültiger Zug";
                     return;
                 }
+                else
+                {
+                    labelStatus.Text = "Gültiger Zug";
+                }
                 game.FindPosById(BoxNumber, out PosById);
                 game.MoveItem(PosById, flagDummy);
                 fitPTtoItems();
@@ -132,9 +136,21 @@ namespace Dafny15Puzzle
 
                 game.BoardSolved(out BoardSolved);
                 if (BoardSolved)
-                {
+                {   
+                    timer1.Stop();
                     GameOn = false;
                     labelStatus.Text = "Gewonnen";
+                    for (int i = 0; i < 16; i++)
+                    {
+                        PuzzleBox.Controls.Remove(picBoxes[i]);
+
+                    }
+                    picBoxWhole = new PictureBox();
+                    picBoxWhole.Height = PuzzleBox.Height;
+                    picBoxWhole.Width = PuzzleBox.Width;
+                    picBoxWhole.Image = image;
+                    PuzzleBox.Controls.Add(picBoxWhole);
+
                 }
             }
             
@@ -280,13 +296,26 @@ namespace Dafny15Puzzle
          */
         private void reScramble_Click(object sender, EventArgs e)
         {
-            ReScramble();
+            if (image == null)
+            {
+                labelStatus.Text = "Bitte wählen sie ein Bild aus.";
+            }
+            else
+            {
+                ReScramble();
+            }
          
         }
 
         private void StartButton_Click(object sender, EventArgs e)
         {
-            NewGame();
+            if (image == null)
+            {
+                labelStatus.Text = "Bitte wählen sie ein Bild aus.";
+            }else{
+                NewGame();
+            }
+            
         }
 
         private void timer1_Tick(object sender, EventArgs e)

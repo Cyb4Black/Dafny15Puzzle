@@ -133,9 +133,9 @@
             this.LabelTime.AutoSize = true;
             this.LabelTime.Location = new System.Drawing.Point(24, 25);
             this.LabelTime.Name = "LabelTime";
-            this.LabelTime.Size = new System.Drawing.Size(34, 13);
+            this.LabelTime.Size = new System.Drawing.Size(49, 13);
             this.LabelTime.TabIndex = 1;
-            this.LabelTime.Text = "00:00";
+            this.LabelTime.Text = "00:00:00";
             // 
             // labelStatus
             // 
