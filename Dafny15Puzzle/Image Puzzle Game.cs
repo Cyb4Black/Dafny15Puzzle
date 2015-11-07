@@ -104,10 +104,7 @@ namespace Dafny15Puzzle
 
         }
 
-        void TimerTick(object sender, EventArgs e)
-        {
-            
-        }
+
         /*
          * Vertauscht das Bild einer PicBox mit dem Bild der MoveAble PicBox 
          */
@@ -205,6 +202,10 @@ namespace Dafny15Puzzle
                 clearBox(picBoxes[15]);
                 TurnCounter = 0;
                 TurnCounterUpdate();
+                if (game != null)
+                {
+                    fitPTtoItems();
+                }
             }
         }
 
