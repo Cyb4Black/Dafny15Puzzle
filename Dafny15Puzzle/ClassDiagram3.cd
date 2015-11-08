@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Dafny.Set&lt;T&gt;">
+    <Position X="2.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAkSEAAAAABAABBEgCIUAABAQAAAAIAAAgAAAQAQAAA=</HashCode>
+      <FileName>GameCore.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Dafny.MultiSet&lt;T&gt;">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAkSEAAAAABAAABEgAIUAABASAAAAIAAAgAAAQAQAAA=</HashCode>
+      <FileName>GameCore.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Dafny.Map&lt;U, V&gt;">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAUSEAAAAAAAAAAEgCIAAABAAgAAAIAAAAAAQAAQAAA=</HashCode>
+      <FileName>GameCore.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Dafny.Sequence&lt;T&gt;">
+    <Position X="9.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQAEAAAAAAQgAAEkCIQAABEAAAAAICAABEAQAARAAA=</HashCode>
+      <FileName>GameCore.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Dafny.Helpers">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Delegate Name="Dafny.Helpers.ComprehensionDelegate&lt;T&gt;" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>GameCore.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="Dafny.Helpers.MapComprehensionDelegate&lt;U, V&gt;" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>GameCore.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="Dafny.Helpers.Function&lt;Input, Result&gt;" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>GameCore.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>IAACAAACEhBAANCAAACAgAgAAAAAEIAAgIEQEAAIAAA=</HashCode>
+      <FileName>GameCore.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="@Game">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAEAAAAAAAEACAAAABDAAAAAAAggAAACAAAA=</HashCode>
+      <FileName>GameCore.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Dafny15Puzzle.Form1">
+    <Position X="7.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQQAAYAQCQkgKIApAKESIACNIAAYJAIECQIAoAAQIA=</HashCode>
+      <FileName>Image Puzzle Game.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Dafny15Puzzle.Program">
+    <Position X="7.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Dafny15Puzzle.PuzzleTile">
+    <Position X="7.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>PuzzleTile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Dafny15Puzzle.Properties.Resources">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Dafny15Puzzle.Properties.Settings">
+    <Position X="5.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="Dafny.Pair&lt;A, B&gt;">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameCore.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Dafny.BigRational">
+    <Position X="0.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAICAAAAAAAAQE8AWAggAAAAAAAIAAAAAAAAAAByA=</HashCode>
+      <FileName>GameCore.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

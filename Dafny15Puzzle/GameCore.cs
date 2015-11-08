@@ -940,6 +940,7 @@ namespace @_System {
 public class @Game {
   public BigInteger[] @borders = (BigInteger[])null;
   public BigInteger[] @items = (BigInteger[])null;
+
   public void @Init(BigInteger[] @a)
   {
   TAIL_CALL_START: ;
@@ -1091,5 +1092,3 @@ public class @Game {
   }
 }
 
-public class @__default {
-}
