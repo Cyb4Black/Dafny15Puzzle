@@ -95,26 +95,35 @@
 	ensures old(items) == items;
 	ensures Valid();
 	{
-		var i := 1;
-		var n := 0;
+		var field := 0;
+		
+		var parities := 0;
 		b := false;
 
-		while(i <= 15)
+		while(field < 15)
 		{
-			var num1 := GetIdByPos(i);
-			var num2 := GetIdByPos(i - 1);
+			var compare := field + 1;
 			
-			if(num1 != 15){
-				if(num1 > num2)
+			if(GetIdByPos(field) != 15){
+				while(compare <= 15)
 				{
-					n := n + 1;
+					if(GetIdByPos(field) > GetIdByPos(compare))
+					{
+						parities := parities + 1;
+					}
+					compare := compare + 1;
 				}
 			}
-			i := i + 1;
-		}
 
-		var emptyPos := FindEmpty();
-		if(n % 2 == (emptyPos + emptyPos / 4) % 2)
+
+
+			if(GetIdByPos(field) == 15 && (0 <= field <= 3 || 8 <= field <= 11))
+			{
+				parities := parities + 1;
+			}
+			field := field + 1;
+		}
+		if(parities % 2 == 0)
 		{
 			b := true;
 		}
