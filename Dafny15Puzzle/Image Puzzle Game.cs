@@ -36,6 +36,10 @@ namespace Dafny15Puzzle
 
         }
 
+
+        /*
+         * SammelMethode für einen Spielstart. 
+         */
         public void NewGame()
         {   
             StoppUhr = DateTime.MinValue;
@@ -46,6 +50,10 @@ namespace Dafny15Puzzle
             GameOn = true;
         }
 
+        /*
+         * Methode die ein game Objekt erzeugt, sowie ein durchgewürfeltes und lösbares Array in diesem Objekt erzeugt.
+         * Die PTs werden mit diesem Array synchronisiert.
+         */
         private void ReScramble()
         {
             Boolean solvable;
@@ -62,6 +70,10 @@ namespace Dafny15Puzzle
             fitPTtoItems();
         }
 
+        /*
+         * Diese Methode synchronisiert die PTs mit den Items.
+         * Sowie die Images der PTs mit den Images der PictureBoxen.
+         */
         private void fitPTtoItems()
         {   PuzzleTile dummyTile = PT[15];
             PuzzleTile[] dummy = new PuzzleTile[BOX_NUM];
@@ -85,6 +97,9 @@ namespace Dafny15Puzzle
             
         }
 
+        /*
+         * Diese Methode würfelt das Items Array des Objekts game durcheinander.
+         */
         private void Scramble()
         {
             Random rand = new Random();
@@ -105,7 +120,12 @@ namespace Dafny15Puzzle
 
 
         /*
-         * Vertauscht das Bild einer PicBox mit dem Bild der MoveAble PicBox 
+         * Diese Methode vertauscht zwei Integer im Array Items.
+         * Sie wird mit einer BoxNumber aufgerufen und überprüft ob er diese Box ziehen darf.
+         * Falls ja vertauscht sie im Array Items den entsprechenden Integer mit der 15.
+         * Synchronisiert die anderen Arrays zählt den TurnCounter hoch.
+         * Prüft dann noch ob das Puzzle gelöst ist.
+         * Falls ja wird das original Bild ausgegeben und das Spiel gestoppt.
          */
         void SwapBoxes(int BoxNumber)
         {
@@ -170,7 +190,9 @@ namespace Dafny15Puzzle
 
          }
 
-
+        /*
+         * Diese Methode updated das LabelTurnCounter.
+         */
         void TurnCounterUpdate()
         {
             LabelTurnCounter.Text = TurnCounter.ToString();
@@ -207,6 +229,7 @@ namespace Dafny15Puzzle
             }
         }
 
+
         /*
          * Löscht das Image einer PicBox
          */
@@ -219,7 +242,8 @@ namespace Dafny15Puzzle
   
 
         /*
-         * Zerteilt das Bild in 16 PictureBoxen mit jeweils 16 Images
+         * Diese Methode erzeugt 16 PictureBoxen samt Click-Event.
+         * Desweiteren zerteilt sie das original Bild in 16 images für 16 PTs und die 16 PictureBoxen.
          */
         private void splitImagesToPicBoxes()
         {
@@ -275,8 +299,9 @@ namespace Dafny15Puzzle
 
             return objBmpImage;
         }
+
         /*
-         * Erzeugt eine Skalierte Bitmap für die jeweiligen kleinen PicBoxen
+         * Erzeugt eine Skalierte Bitmap für die jeweiligen kleinen PTs bzw PictureBoxen
          */
         private Bitmap CreateBitmapImage(Image image, int index, int numRow, int numCol, int unitX, int unitY)
         {
@@ -306,6 +331,9 @@ namespace Dafny15Puzzle
          
         }
 
+        /*
+         * Click-Event des StartButtons
+         */
         private void StartButton_Click(object sender, EventArgs e)
         {
             if (image == null)
@@ -317,6 +345,9 @@ namespace Dafny15Puzzle
             
         }
 
+        /*
+         * Zeitliches hochzählen sowie updates des LabelTimes nach jedem Tick.
+         */
         private void timer1_Tick(object sender, EventArgs e)
         {
             StoppUhr=StoppUhr.AddSeconds(1);
