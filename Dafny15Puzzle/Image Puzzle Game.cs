@@ -13,7 +13,7 @@ namespace Dafny15Puzzle
 {
     public partial class Form1 : Form
     {
-        private int MoveablePTFlag, TurnCounter;
+        private int TurnCounter;
         OpenFileDialog openFileDialog = null;
         Image image;
         PictureBox picBoxWhole = null;
@@ -82,7 +82,6 @@ namespace Dafny15Puzzle
             {
                 picBoxes[i].Image = PT[i].PuzzleTileImage;
             }
-            MoveablePTFlag=Array.IndexOf(PT, dummyTile);
             
         }
 
@@ -198,7 +197,6 @@ namespace Dafny15Puzzle
 
 
                 splitImagesToPicBoxes();
-                MoveablePTFlag = 15;
                 clearBox(picBoxes[15]);
                 TurnCounter = 0;
                 TurnCounterUpdate();

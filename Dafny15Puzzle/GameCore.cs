@@ -960,16 +960,16 @@ public class @Game {
     @pos = BigInteger.Zero;
   TAIL_CALL_START: ;
     var _this = this;
-    BigInteger @_172_i = BigInteger.Zero;
-    @_172_i = new BigInteger(0);
+    BigInteger @_153504_i = BigInteger.Zero;
+    @_153504_i = new BigInteger(0);
     @pos = new BigInteger(0);
-    while ((@_172_i) <= (new BigInteger(15)))
+    while ((@_153504_i) <= (new BigInteger(15)))
     {
-      if ((((_this).@items)[(int)(@_172_i)]).@Equals(@id))
+      if ((((_this).@items)[(int)(@_153504_i)]).@Equals(@id))
       {
-        @pos = @_172_i;
+        @pos = @_153504_i;
       }
-      @_172_i = (@_172_i) + (new BigInteger(1));
+      @_153504_i = (@_153504_i) + (new BigInteger(1));
     }
   }
   public void @FindEmpty(out BigInteger @pos)
@@ -977,15 +977,15 @@ public class @Game {
     @pos = BigInteger.Zero;
   TAIL_CALL_START: ;
     var _this = this;
-    BigInteger @_173_i = BigInteger.Zero;
-    @_173_i = new BigInteger(0);
-    while ((@_173_i) <= (new BigInteger(15)))
+    BigInteger @_153505_i = BigInteger.Zero;
+    @_153505_i = new BigInteger(0);
+    while ((@_153505_i) <= (new BigInteger(15)))
     {
-      if ((((_this).@items)[(int)(@_173_i)]).@Equals(new BigInteger(15)))
+      if ((((_this).@items)[(int)(@_153505_i)]).@Equals(new BigInteger(15)))
       {
-        @pos = @_173_i;
+        @pos = @_153505_i;
       }
-      @_173_i = (@_173_i) + (new BigInteger(1));
+      @_153505_i = (@_153505_i) + (new BigInteger(1));
     }
   }
   public BigInteger @GetIdByPos(BigInteger @pos) {
@@ -996,16 +996,16 @@ public class @Game {
     @b = false;
   TAIL_CALL_START: ;
     var _this = this;
-    BigInteger @_174_i = BigInteger.Zero;
-    @_174_i = new BigInteger(0);
+    BigInteger @_153506_i = BigInteger.Zero;
+    @_153506_i = new BigInteger(0);
     @b = true;
-    while ((@_174_i) <= (new BigInteger(15)))
+    while ((@_153506_i) <= (new BigInteger(15)))
     {
-      if (!(((_this).@items)[(int)(@_174_i)]).@Equals(@_174_i))
+      if (!(((_this).@items)[(int)(@_153506_i)]).@Equals(@_153506_i))
       {
         @b = false;
       }
-      @_174_i = (@_174_i) + (new BigInteger(1));
+      @_153506_i = (@_153506_i) + (new BigInteger(1));
     }
   }
   public void @IsSolvable(out bool @b)
@@ -1013,31 +1013,33 @@ public class @Game {
     @b = false;
   TAIL_CALL_START: ;
     var _this = this;
-    BigInteger @_175_i = BigInteger.Zero;
-    @_175_i = new BigInteger(1);
-    BigInteger @_176_n = BigInteger.Zero;
-    @_176_n = new BigInteger(0);
+    BigInteger @_153507_field = BigInteger.Zero;
+    @_153507_field = new BigInteger(0);
+    BigInteger @_153508_parities = BigInteger.Zero;
+    @_153508_parities = new BigInteger(0);
     @b = false;
-    while ((@_175_i) <= (new BigInteger(15)))
+    while ((@_153507_field) < (new BigInteger(15)))
     {
-      BigInteger @_177_num1 = BigInteger.Zero;
-      @_177_num1 = (_this).@GetIdByPos(@_175_i);
-      BigInteger @_178_num2 = BigInteger.Zero;
-      @_178_num2 = (_this).@GetIdByPos((@_175_i) - (new BigInteger(1)));
-      if (!(@_177_num1).@Equals(new BigInteger(15)))
+      BigInteger @_153509_compare = BigInteger.Zero;
+      @_153509_compare = (@_153507_field) + (new BigInteger(1));
+      if (!((_this).@GetIdByPos(@_153507_field)).@Equals(new BigInteger(15)))
       {
-        if ((@_177_num1) > (@_178_num2))
+        while ((@_153509_compare) <= (new BigInteger(15)))
         {
-          @_176_n = (@_176_n) + (new BigInteger(1));
+          if (((_this).@GetIdByPos(@_153507_field)) > ((_this).@GetIdByPos(@_153509_compare)))
+          {
+            @_153508_parities = (@_153508_parities) + (new BigInteger(1));
+          }
+          @_153509_compare = (@_153509_compare) + (new BigInteger(1));
         }
       }
-      @_175_i = (@_175_i) + (new BigInteger(1));
+      if ((((_this).@GetIdByPos(@_153507_field)).@Equals(new BigInteger(15))) && ((((new BigInteger(0)) <= (@_153507_field)) && ((@_153507_field) <= (new BigInteger(3)))) || (((new BigInteger(8)) <= (@_153507_field)) && ((@_153507_field) <= (new BigInteger(11))))))
+      {
+        @_153508_parities = (@_153508_parities) + (new BigInteger(1));
+      }
+      @_153507_field = (@_153507_field) + (new BigInteger(1));
     }
-    BigInteger @_179_emptyPos = BigInteger.Zero;
-    BigInteger _out0;
-    (_this).@FindEmpty(out _out0);
-    @_179_emptyPos = _out0;
-    if ((Dafny.Helpers.EuclideanModulus((@_176_n), new BigInteger(2))).@Equals(Dafny.Helpers.EuclideanModulus(((@_179_emptyPos) + (Dafny.Helpers.EuclideanDivision((@_179_emptyPos), new BigInteger(4)))), new BigInteger(2))))
+    if ((Dafny.Helpers.EuclideanModulus((@_153508_parities), new BigInteger(2))).@Equals(new BigInteger(0)))
     {
       @b = true;
     }
@@ -1046,35 +1048,35 @@ public class @Game {
     return ((this).@BordersContain(@x)) && ((this).@BordersContain(@y));
   }
   public bool @BordersContain(BigInteger @v) {
-    return Dafny.Helpers.QuantInt(new BigInteger(0), new BigInteger(((this).@borders).@Length), false, @_180_i => (((new BigInteger(0)) <= (@_180_i)) && ((@_180_i) < (new BigInteger(((this).@borders).@Length)))) && ((((this).@borders)[(int)(@_180_i)]).@Equals(@v)));
+    return Dafny.Helpers.QuantInt(new BigInteger(0), new BigInteger(((this).@borders).@Length), false, @_153510_i => (((new BigInteger(0)) <= (@_153510_i)) && ((@_153510_i) < (new BigInteger(((this).@borders).@Length)))) && ((((this).@borders)[(int)(@_153510_i)]).@Equals(@v)));
   }
   public void @CanMove(BigInteger @id, out BigInteger @target)
   {
     @target = BigInteger.Zero;
   TAIL_CALL_START: ;
     var _this = this;
-    BigInteger @_181_indexToMove = BigInteger.Zero;
-    BigInteger _out1;
-    (_this).@FindPosById(@id, out _out1);
-    @_181_indexToMove = _out1;
+    BigInteger @_153511_indexToMove = BigInteger.Zero;
+    BigInteger _out0;
+    (_this).@FindPosById(@id, out _out0);
+    @_153511_indexToMove = _out0;
     @target = new BigInteger(16);
     if (!(@id).@Equals(new BigInteger(15)))
     {
-      if ((((!((_this).@IsBorderSwitch(@_181_indexToMove, (@_181_indexToMove) + (new BigInteger(1))))) && ((@id) < (new BigInteger(15)))) && (((@_181_indexToMove) + (new BigInteger(1))) < (new BigInteger(16)))) && (((_this).@GetIdByPos((@_181_indexToMove) + (new BigInteger(1)))).@Equals(new BigInteger(15))))
+      if ((((!((_this).@IsBorderSwitch(@_153511_indexToMove, (@_153511_indexToMove) + (new BigInteger(1))))) && ((@id) < (new BigInteger(15)))) && (((@_153511_indexToMove) + (new BigInteger(1))) < (new BigInteger(16)))) && (((_this).@GetIdByPos((@_153511_indexToMove) + (new BigInteger(1)))).@Equals(new BigInteger(15))))
       {
-        @target = (@_181_indexToMove) + (new BigInteger(1));
+        @target = (@_153511_indexToMove) + (new BigInteger(1));
       }
-      if ((((!((_this).@IsBorderSwitch(@_181_indexToMove, (@_181_indexToMove) - (new BigInteger(1))))) && ((@id) < (new BigInteger(15)))) && (((@_181_indexToMove) - (new BigInteger(1))) >= (new BigInteger(0)))) && (((_this).@GetIdByPos((@_181_indexToMove) - (new BigInteger(1)))).@Equals(new BigInteger(15))))
+      if ((((!((_this).@IsBorderSwitch(@_153511_indexToMove, (@_153511_indexToMove) - (new BigInteger(1))))) && ((@id) < (new BigInteger(15)))) && (((@_153511_indexToMove) - (new BigInteger(1))) >= (new BigInteger(0)))) && (((_this).@GetIdByPos((@_153511_indexToMove) - (new BigInteger(1)))).@Equals(new BigInteger(15))))
       {
-        @target = (@_181_indexToMove) - (new BigInteger(1));
+        @target = (@_153511_indexToMove) - (new BigInteger(1));
       }
-      if ((((@id) < (new BigInteger(15))) && (((@_181_indexToMove) + (new BigInteger(4))) < (new BigInteger(16)))) && (((_this).@GetIdByPos((@_181_indexToMove) + (new BigInteger(4)))).@Equals(new BigInteger(15))))
+      if ((((@id) < (new BigInteger(15))) && (((@_153511_indexToMove) + (new BigInteger(4))) < (new BigInteger(16)))) && (((_this).@GetIdByPos((@_153511_indexToMove) + (new BigInteger(4)))).@Equals(new BigInteger(15))))
       {
-        @target = (@_181_indexToMove) + (new BigInteger(4));
+        @target = (@_153511_indexToMove) + (new BigInteger(4));
       }
-      if ((((@id) < (new BigInteger(15))) && (((@_181_indexToMove) - (new BigInteger(4))) >= (new BigInteger(0)))) && (((_this).@GetIdByPos((@_181_indexToMove) - (new BigInteger(4)))).@Equals(new BigInteger(15))))
+      if ((((@id) < (new BigInteger(15))) && (((@_153511_indexToMove) - (new BigInteger(4))) >= (new BigInteger(0)))) && (((_this).@GetIdByPos((@_153511_indexToMove) - (new BigInteger(4)))).@Equals(new BigInteger(15))))
       {
-        @target = (@_181_indexToMove) - (new BigInteger(4));
+        @target = (@_153511_indexToMove) - (new BigInteger(4));
       }
     }
   }
@@ -1082,10 +1084,10 @@ public class @Game {
   {
   TAIL_CALL_START: ;
     var _this = this;
-    BigInteger @_182_dummy = BigInteger.Zero;
-    @_182_dummy = ((_this).@items)[(int)(@targetIndex)];
+    BigInteger @_153512_dummy = BigInteger.Zero;
+    @_153512_dummy = ((_this).@items)[(int)(@targetIndex)];
     ((_this).@items)[(int)(@targetIndex)] = ((_this).@items)[(int)(@indexToMove)];
-    ((_this).@items)[(int)(@indexToMove)] = @_182_dummy;
+    ((_this).@items)[(int)(@indexToMove)] = @_153512_dummy;
   }
 }
 
