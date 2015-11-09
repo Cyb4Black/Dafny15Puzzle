@@ -130,6 +130,9 @@
 		var parities := 0;
 		b := false;
 
+		/*
+		*Zähle Fehlstellungen (alle IDs kleiner der Verglichenenen die hinter dieser liegen, z.B. ID 12 in oberer linker Ecke liefert 11 Fehlstellungen)
+		*/
 		while(field < 15)
 		{
 			var compare := field + 1;
@@ -145,8 +148,9 @@
 				}
 			}
 
-
-
+			/*
+			* Wenn Leerfeld in ungerader Zeile, addiere 1 zu Fehlstellungen, vgl. gelöste Situation 0 Fehlstellungen und Leerfeld in gerader Zeile => 0 + 0 = 0 => 0 % 2 = 0
+			*/
 			if(GetIdByPos(field) == 15 && (0 <= field <= 3 || 8 <= field <= 11))
 			{
 				parities := parities + 1;
