@@ -2,6 +2,9 @@
 	var borders : array<int>;
 	var items : array<int>;
 
+	/*
+	* Die Init-Methode initialisiert das Vergleichs-Array Borders und übernimmt das übergebene Array a für das Spielfeld-Array "items"
+	*/
 	constructor Init(a: array<int>)
 	modifies this
 	{
@@ -17,12 +20,26 @@
 		items := a;
 	}
 
+	/*
+	* Das Prädikat Valid() validiert die Gültigkeit der Objekte items und Borders.
+	* Regeln:
+	* - items und borders dürfen nich NULL sein
+	* - items muss die Länge 16 haben
+	* - borders muss die Länge 8 haben
+	* - in items darf jede ID zwischen 0 und 15 (incl.) nur ein mal vorkommen
+	*/
 	predicate Valid()
 	reads this;
+	reads items;
 	{
 		items != null && items.Length == 16 && borders != null && borders.Length == 8
+		&& forall j,k :: 0 <= j < k < items.Length ==> items[j] != items[k]
+		&& forall l :: 0 <= l < items.Length ==> 0 <= items[l] < 16
 	}
 
+	/*
+	* FindPosById iteriert über das Array items und gibt die position des Gesuchten Element im Array zurück
+	*/
 	method FindPosById(id: int) returns (pos: int)
 	requires Valid();
 	ensures old(items) == items;
@@ -43,6 +60,9 @@
 		}
 	}
 
+	/*
+	* FindEmpty iteriert über das Array und gibt die Positiong der ID 15 zurück, diese Stellt das leere Feld im Puzzle dar.
+	*/
 	method FindEmpty() returns (pos: int)
 	requires Valid();
 	ensures old(items) == items;
@@ -61,6 +81,10 @@
 		}
 	}
 
+	/*
+	* GetIdByPos gibt die an der gesuchten Position zurück. Diese Methode entspricht einem Getter und
+	* dient der leserlichkeit an anderen Stellen des Codes
+	*/
 	function method GetIdByPos(pos: int) : int
 	reads this;
 	reads items;
@@ -72,6 +96,9 @@
 		items[pos]
 	}
 
+	/*
+	* BoardSolved prüft anhand der gleichheit der ID zur Position ob, das Puzzle gelöst wurde
+	*/
 	method BoardSolved() returns (b: bool)
 	requires Valid();
 	ensures old(items) == items;
@@ -90,6 +117,9 @@
 		}
 	}
 
+	/*
+	* IsSolvable prüft anhand der Fehlstellungen und der Position des Leerfeldes ob das zufällig generierte Spielfeld lösbar ist.
+	*/
 	method IsSolvable() returns (b: bool)
 	requires Valid();
 	ensures old(items) == items;
@@ -129,22 +159,34 @@
 		}
 	}
 
+	/*
+	* Hilfsfunktion um zu testen, ob es sich bei 2 Felder um Kantenfelder handelt.
+	*/
 	function method IsBorderSwitch(x: int, y: int) : bool
 	requires Valid();
 	reads this;
+	reads items;
 	reads borders;
 	{
 		(BordersContain(x) && BordersContain(y))
 	}
 
+	/*
+	* Hilfsfunktion um festzusstellen, ob die Benannte Id derzeit in den Borders positioniert ist.
+	*/
 	function method BordersContain(v: int) : bool
 	requires Valid();
 	reads this;
+	reads items;
 	reads borders;
 	{
 		exists i :: 0 <= i < borders.Length && borders[i] == v
 	}
 
+	/*
+	* CanMove prüft, ob das Feld der gegebenen Id das leere Feld als direkten Nachbarn hat und gibt ggf. die Position zurück.
+	* Ansonsten gibt sie die Fakeposition 16 zurück, von der wir wissen, dass diese nicht existiert.
+	*/
 	method CanMove(id: int) returns(target: int)
 	requires Valid();
 	ensures Valid();
@@ -167,6 +209,9 @@
 		}
 	}
 
+	/*
+	* MoveItem vertauscht die Items an den gegebenen Positionen.
+	*/
 	method MoveItem (indexToMove: int, targetIndex: int)
 	requires Valid();
 	requires 0 <= indexToMove < 16;
